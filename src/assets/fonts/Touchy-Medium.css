@@ -1,0 +1,11 @@
+@font-face {
+    font-family: "Touchy-Medium";
+    src: url("Touchy-Medium.eot");
+    src: url("Touchy-Medium.eot?#iefix") format("embedded-opentype"),
+         url("Touchy-Medium.woff2") format("woff2"),
+         url("Touchy-Medium.woff") format("woff"),
+         url("Touchy-Medium.ttf") format("ttf"),
+         url("Touchy-Medium.svg#Touchy-Medium") format("svg");
+    font-style: normal;
+    font-weight: regular;
+}

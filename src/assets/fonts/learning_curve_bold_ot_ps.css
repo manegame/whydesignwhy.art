@@ -1,0 +1,11 @@
+@font-face {
+    font-family: "LearningCurve-Bold";
+    src: url("learning_curve_bold_ot_ps.eot");
+    src: url("learning_curve_bold_ot_ps.eot?#iefix") format("embedded-opentype"),
+         url("learning_curve_bold_ot_ps.woff2") format("woff2"),
+         url("learning_curve_bold_ot_ps.woff") format("woff"),
+         url("learning_curve_bold_ot_ps.ttf") format("ttf"),
+         url("learning_curve_bold_ot_ps.svg#LearningCurve-Bold") format("svg");
+    font-style: normal;
+    font-weight: 700;
+}
