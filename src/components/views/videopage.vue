@@ -89,7 +89,7 @@ export default {
       background-image: url('../../../static/left.svg');
       background-position: right;
       background-repeat: no-repeat;
-      transition: all 0.3s ease-out;
+      transition: all 0.41s ease-out;
       transform: none;
       animation: peek 10s infinite;
 
@@ -108,7 +108,7 @@ export default {
       background-image: url('../../../static/right.svg');
       background-position: left;
       background-repeat: no-repeat;
-      transition: all 0.3s ease-out;
+      transition: all 0.45s ease-out;
 
       &--open {
         right: -65vw;
@@ -132,7 +132,7 @@ export default {
     transform: initial;
   }
   30% {
-    transform: skew(-4deg, 0);
+    transform: skew(-4deg, 0) scale(1.01, 1);
   }
   35% {
     transform: initial;
