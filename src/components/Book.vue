@@ -60,7 +60,7 @@ export default {
   overflow: hidden;
   font-size: 24px;
   line-height: 24px;
-  
+
   &__pdf {
     width: 30vw;
     margin: 5vh auto;
@@ -108,7 +108,7 @@ export default {
       text-decoration: none;
       cursor: pointer;
       text-align: center;
-      transition: background 250ms ease-in-out, 
+      transition: background 250ms ease-in-out,
                   transform 150ms ease;
       -webkit-appearance: none;
       -moz-appearance: none;

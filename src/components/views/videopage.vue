@@ -8,10 +8,10 @@
             :class='{ "videopage__curtains__right--open": openCurtains }'></div>
     </div>
     <div class='videopage__video embed-video'>
-      <youtube  :video-id="videoId" 
-                ref="youtube" 
-                :player-vars="playerVars" 
-                @playing="playing" 
+      <youtube  :video-id="videoId"
+                ref="youtube"
+                :player-vars="playerVars"
+                @playing="playing"
                 @ended='ended' />
     </div>
   </div>
@@ -63,7 +63,6 @@ export default {
 
 <style scoped lang='scss'>
 @import '../../assets/style/variables';
-
 
 .videopage {
   width: 100vw;
@@ -124,7 +123,7 @@ export default {
   }
 }
 
-@keyframes peek {  
+@keyframes peek {
   0% {
     transform: initial;
   }

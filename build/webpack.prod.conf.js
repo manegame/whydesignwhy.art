@@ -114,7 +114,13 @@ const webpackConfig = merge(baseWebpackConfig, {
         from: path.resolve(__dirname, '../static'),
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
-      }
+      },
+      // This includes the redirect necessary for using router history mode
+      {
+        from: path.resolve(__dirname, '../src/config'),
+        to: config.build.assetsRoot,
+        ignore: ['.*']
+      }  
     ])
   ]
 })

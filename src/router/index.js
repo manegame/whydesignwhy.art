@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import mainmenu from '@/components/views/mainmenu'
-import main from '@/components/views/main'
+import mainpage from '@/components/views/mainpage'
 import bookpage from '@/components/views/bookpage'
 import videopage from '@/components/views/videopage'
+import importancepage from '@/components/views/importancepage'
 
 Vue.use(Router)
 
@@ -15,7 +16,7 @@ export default new Router({
       name: 'main',
       components: {
         menu: mainmenu,
-        content: main
+        content: mainpage
       }
     },
     {
@@ -32,6 +33,14 @@ export default new Router({
       components: {
         menu: mainmenu,
         content: videopage
+      }
+    },
+    {
+      path: '/importance',
+      name: 'importance',
+      components: {
+        menu: mainmenu,
+        content: importancepage
       }
     }
   ]
