@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class='file'>
     <form novalidate
           v-if="isInitial || isSaving">
       <div class="dropbox">
@@ -93,9 +93,14 @@ export default {
 <style scoped lang='scss'>
 @import '@/assets/style/variables.scss';
 
+.file {
+  margin-bottom: 80px;
+}
+
 .dropbox {
+  border-radius: 20px;
   outline: 2px dashed grey; /* the dash box */
-  outline-offset: -10px;
+  outline-offset: -20px;
   background: $yellow-light;
   color: dimgray;
   padding: 10px 10px;
