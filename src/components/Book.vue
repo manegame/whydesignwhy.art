@@ -4,9 +4,11 @@
           v-if="loadedRatio > 0 && loadedRatio < 1"
           :style="{ width: loadedRatio * 100 + '%' }" />
     <div  class='book__pdf oridomi'
-          :class='{ "book__pdf--double": page !== 1 && page !== numPages }'>
+          :class='{ 
+            "book__pdf--double" : page !== 1 && page !== numPages,
+            "book__pdf--loading" : loading
+          }'>
       <pdf  class='book__pdf__inner'
-            v-if="show"
             ref="pdf"
             :src="src"
             :page="page"
@@ -15,18 +17,24 @@
             @num-pages="numPages = $event"
             @link-clicked="page = $event" />
     </div>
-    <div class='book__navigation'>
-      <button class='book__navigation--button'
-              :disabled='page === 1'
-              @click='page--' >previous</button>
-      <span class='book__navigation--numbers'>
-        <span v-html='page' />
-        <span v-html='" / " + numPages' />
-      </span>
-      <button class='book__navigation--button'
-              :disabled='page === numPages'
-              @click='page++' >next</button>
-    </div>
+    <transition name='fade'>
+      <div  class='book__navigation'
+            v-if='!loading'>
+        <button class='book__navigation--button'
+                :disabled='page === 1'
+                @click='page--' >previous</button>
+        <span class='book__navigation--numbers'>
+          <span v-html='page' />
+          <span v-html='" / " + numPages' />
+        </span>
+        <button class='book__navigation--button'
+                :disabled='page === numPages'
+                @click='page++' >next</button>
+      </div>
+      <div v-else>
+        <p>Loading...</p>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -40,12 +48,17 @@ export default {
   },
   data () {
     return {
-      show: true,
       src: './static/ITWIW-digital.pdf',
       loadedRatio: 0,
       page: 1,
       numPages: 0,
       rotate: 0
+    }
+  },
+  computed: {
+    loading () {
+      if (this.numPages === 0 || this.numPages === undefined) return true
+      else return false
     }
   }
 }
@@ -66,6 +79,10 @@ export default {
     margin: 5vh auto;
     max-height: 100vh;
     box-shadow: $shadow-inverted;
+
+    &--loading {
+      height: calc(30vw * 1.4142);
+    }
 
     &--double {
       width: 60vw;
