@@ -35,6 +35,10 @@ export default {
 
   &--two {
     z-index: 0;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
   }
 }
 
