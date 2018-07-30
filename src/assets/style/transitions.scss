@@ -1,0 +1,30 @@
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-enter-to,
+.fade-leave {
+  opacity: 1;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.delayed_fade-enter-active,
+.delayed_fade-leave-active {
+  transition: opacity 0.3s;
+  transition-delay: 0.3s;
+}
+
+.delayed_fade-enter-to,
+.delayed_fade-leave {
+  opacity: 1;
+}
+
+.delayed_fade-enter,
+.delayed_fade-leave-to {
+  opacity: 0;
+}

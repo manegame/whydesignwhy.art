@@ -1,12 +1,18 @@
 <template>
   <div class='mainpage'>
     <!-- main -->
+    <side :content='"Poll"' />
   </div>
 </template>
 
 <script>
+import side from '@/components/side'
+
 export default {
   name: 'mainpage',
+  components: {
+    side
+  },
   data () {
     return {
       msg: 'main'

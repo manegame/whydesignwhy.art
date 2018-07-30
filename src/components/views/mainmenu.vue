@@ -65,6 +65,7 @@ export default {
 
 <style lang='scss'>
 @import '../../assets/style/variables.scss';
+@import '../../assets/style/transitions.scss';
 @import '../../assets/style/helpers/responsive.scss';
 @import '../../assets/fonts/learning_curve_bold_ot_ps.css';
 
@@ -125,6 +126,12 @@ export default {
     justify-content: space-around;
     transition: bottom 0.6s ease;
 
+    @include screen-size('small') {
+      flex-flow: column nowrap;
+      justify-content: center;
+      align-items: center;
+    }
+
     &--low {
       bottom: -25vh;
     }
@@ -143,6 +150,10 @@ export default {
       &--active,
       &:hover {
         background-color: $yellow;
+      }
+
+      @include screen-size('small') {
+        margin-bottom: 12px;
       }
     }
   }
@@ -171,20 +182,5 @@ export default {
       }
     }
   }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s;
-}
-
-.fade-enter-to,
-.fade-leave {
-  opacity: 1;
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>

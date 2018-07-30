@@ -94,7 +94,7 @@ export default {
 
       &--open {
         left: -65vw;
-        transform: skew(-10deg, 0);
+        transform: $skew;
       }
     }
 
