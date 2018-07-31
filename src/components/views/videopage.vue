@@ -118,8 +118,7 @@ export default {
 
   &__video {
     z-index: 4;
-    width: 60vw;
-    margin-left: 20vw;
+    width: 100%;
   }
 }
 

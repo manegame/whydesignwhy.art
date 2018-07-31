@@ -69,6 +69,13 @@ export default {
 @import '../../assets/style/helpers/responsive.scss';
 @import '../../assets/fonts/learning_curve_bold_ot_ps.css';
 
+// SET pointer-events: all on everything that needs to be clickable...
+
+@mixin clickable {
+  cursor: pointer;
+  pointer-events:all;
+}
+
 .mainmenu {
   background: transparent;
   position: fixed;
@@ -87,10 +94,11 @@ export default {
     height: auto;
     border-radius: 10px;
     background: white;
-    cursor: pointer;
     transition: box-shadow 0.3s ease-out, transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     box-shadow: none;
     transform: translate(0) rotate(0deg);
+
+    @include clickable;
 
     &--flipped {
       transform: translate(-54vw, -15vh) rotate(80deg);
@@ -104,12 +112,6 @@ export default {
     @include screen-size('small') {
       width: 80vw;
       left: calc(10vw - 12px); /* padding included */
-
-      /*
-      &--flipped {
-        transform: translate(-54vw, -15vh) rotate(80deg);
-      }
-      */
     }
   }
 
@@ -142,6 +144,8 @@ export default {
       padding: 12px 0;
       border-radius: 10px;
       transition: all 0.3s ease;
+
+      @include clickable;
 
       &--shadow {
         box-shadow: $shadow;

@@ -9,9 +9,10 @@ export default {
   name: 'Video',
   data () {
     return {
-      videoId: 'YJAGNad7FLI',
+      videoId: '-v4NwizarDA',
       playerVars: {
-        autoplay: 1
+        autoplay: 1,
+        showinfo: 0
       }
     }
   },
@@ -25,6 +26,6 @@ export default {
 
 <style lang="scss" scoped>
 .video {
-  color: red;
+  width: 100vw;
 }
 </style>
