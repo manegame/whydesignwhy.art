@@ -4,7 +4,7 @@
           v-if="loadedRatio > 0 && loadedRatio < 1"
           :style="{ width: loadedRatio * 100 + '%' }" />
     <div  class='book__pdf oridomi'
-          :class='{ 
+          :class='{
             "book__pdf--double" : page !== 1 && page !== numPages,
             "book__pdf--loading" : loading
           }'>

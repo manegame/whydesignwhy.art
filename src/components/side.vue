@@ -42,7 +42,7 @@
           </h2>
         </div>
       </div>
-      <p  class='side__content__vote_status' 
+      <p  class='side__content__vote_status'
           v-html='voteStatus' />
     </div>
   </div>
@@ -57,7 +57,7 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
       open: false,
       votes: {
@@ -69,7 +69,7 @@ export default {
     }
   },
   computed: {
-    yesPercentage() {
+    yesPercentage () {
       if (this.votes.yes + this.votes.no === 0) {
         return 50
       } else {
@@ -77,15 +77,15 @@ export default {
         return num.toFixed(2)
       }
     },
-    noPercentage() {
+    noPercentage () {
       return 100 - this.yesPercentage
     }
   },
   methods: {
-    vote(answer) {
+    vote (answer) {
       if (!this.hasVoted) {
-        if (answer === "yes") this.votes.yes++
-        else if (answer === "no") this.votes.no++
+        if (answer === 'yes') this.votes.yes++
+        else if (answer === 'no') this.votes.no++
         this.hasVoted = true
         this.voteStatus = 'Thanks for your vote!'
       } else {

@@ -22,11 +22,12 @@ export default {
   name: 'videopage',
   data () {
     return {
-      videoId: 'SqUqVBsbaRk',
+      videoId: '-v4NwizarDA',
       openCurtains: false,
       playerVars: {
         autoplay: 0,
-        rel: 0
+        rel: 0,
+        showinfo: 0
       }
     }
   },
