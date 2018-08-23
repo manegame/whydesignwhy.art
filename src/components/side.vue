@@ -9,9 +9,9 @@
     <div  class='side__content'
           v-if='content === "Poll"'>
       <h1 class='side__content__title'>Should these white men go to Africa?</h1>
-      <p class='side__content__desc'>Jonathan Hielkema invites 
-        <a href='https://twitter.com/jimmy_p_nelson?lang=en'>@jimmy_nelson</a>, 
-        <a href='http://renzomartens.com/'>@renzo_martens</a> and 
+      <p class='side__content__desc'>Jonathan Hielkema invites
+        <a href='https://twitter.com/jimmy_p_nelson?lang=en'>@jimmy_nelson</a>,
+        <a href='http://renzomartens.com/'>@renzo_martens</a> and
         <a href='https://www.instagram.com/janhoekjoh/?hl=en'>@jan_hoek</a> for a joint trip to his mini post-colony in ..., Senegal to discuss the ideas outlined in the book. <br>
         <br>
         What do you think? Should they go?
@@ -197,7 +197,7 @@ export default {
     transform: rotate(-90deg);
     transform-origin: left bottom 0;
     transition: box-shadow 0.3s ease;
-    
+
     &:hover {
       box-shadow: $shadow-inverted;
     }

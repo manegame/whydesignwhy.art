@@ -1,125 +1,95 @@
 <template>
-  <div class='videopage'>
-    <div  class='videopage__curtains'
-          @click='openCurtains = !openCurtains'>
-      <div  class='videopage__curtains__left'
-            :class='{ "videopage__curtains__left--open": openCurtains }'></div>
-      <div  class='videopage__curtains__right'
-            :class='{ "videopage__curtains__right--open": openCurtains }'></div>
+  <div  class='videopage'
+        id='parent'>
+    <div  class='videopage__stage'
+          id='video1'>
+      <Video :options="{
+                provider: 'youtube',
+                id: '-v4NwizarDA'
+              }"/>
     </div>
-    <div class='videopage__video embed-video'>
-      <youtube  :video-id="videoId"
-                ref="youtube"
-                :player-vars="playerVars"
-                @playing="playing"
-                @ended='ended' />
+    <div  class='videopage__stage'
+          id='video2'>
+      <Video :options="{
+                provider: 'vimeo',
+                id: '278386917'
+              }"/>
     </div>
+    <!-- <a  href='#'
+        class='videopage__next'
+        v-scroll-to="videoScroll">
+      Next
+    </a> -->
   </div>
 </template>
 
 <script>
+import Video from '@/components/Video'
+
 export default {
   name: 'videopage',
+  components: {
+    Video
+  },
   data () {
     return {
-      videoId: '-v4NwizarDA',
-      openCurtains: false,
-      playerVars: {
-        autoplay: 0,
-        rel: 0,
-        showinfo: 0
+      videoScroll: {
+        el: '#video2',
+        container: '#parent',
+        duration: 500,
+        easing: 'linear',
+        offset: 0,
+        x: false,
+        y: true
       }
-    }
-  },
-  computed: {
-    player () {
-      return this.$refs.youtube.player
     }
   },
   methods: {
-    async playVideo () {
-      await this.player.playVideo()
-      // Do something after the playVideo command
-      console.log('playVideo triggered')
-    },
-    playing () {
-      console.log('we watching!')
-    },
-    ended () {
-      console.log('video ended')
-    }
-  },
-  watch: {
-    openCurtains (val) {
-      if (val) {
-        console.log('curtains open!')
-        this.player.playVideo()
-      } else {
-        this.player.pauseVideo()
-      }
+    nextVideo () {
+      this.$refs.parent.scrollTo(2000, this.$refs.parent.clientHeight)
+      console.log(this.$refs.video2)
     }
   }
 }
+
 </script>
 
 <style scoped lang='scss'>
 @import '../../assets/style/variables';
+@import '../../assets/style/helpers/mixins';
+@import '../../assets/style/helpers/responsive.scss';
 
 .videopage {
   width: 100vw;
   height: 100vh;
-  background: black;
-  color: white;
-  overflow: hidden;
+  overflow-y: scroll;
 
-  &__curtains {
-    z-index: 5;
+  &__next {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    cursor: pointer;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    opacity: 1;
+    transition: opacity 0.3s ease;
 
-    &__left {
-      position: absolute;
-      left: 0;
-      width: 50%;
-      height: 100%;
-      background: white;
-      background-image: url('../../../static/left.svg');
-      background-position: right;
-      background-repeat: no-repeat;
-      transition: all 0.41s ease-out;
-      transform: none;
-      animation: peek 10s infinite;
-
-      &--open {
-        left: -65vw;
-        transform: $skew;
-      }
+    &--hidden {
+      opacity: 0;
     }
 
-    &__right {
-      position: absolute;
-      right: 0;
-      width: 50%;
-      height: 100%;
-      background: white;
-      background-image: url('../../../static/right.svg');
-      background-position: left;
-      background-repeat: no-repeat;
-      transition: all 0.45s ease-out;
-
-      &--open {
-        right: -65vw;
-        transform: skew(10deg, 0);
-      }
-    }
+    @include buttons;
   }
 
-  &__video {
-    z-index: 4;
+  &__stage {
     width: 100%;
+    height: 100%;
+    padding-bottom: 20px;
+    background: black;
+    color: white;
+    overflow: hidden;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
   }
 }
 
@@ -131,7 +101,7 @@ export default {
     transform: initial;
   }
   30% {
-    transform: skew(-4deg, 0) scale(1.01, 1);
+    transform: skew(-3deg, 0) scale(1.04, 1);
   }
   35% {
     transform: initial;
