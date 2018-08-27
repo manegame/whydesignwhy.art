@@ -59,12 +59,12 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
       open: false,
       votes: {
-        yes: 0,
-        no: 0
+        yes: 100,
+        no: 20
       },
       hasVoted: false,
       voteStatus: ''
@@ -144,7 +144,7 @@ export default {
       margin: 0 auto;
       border-radius: 10px;
       overflow: hidden;
-      background: rgb(205, 205, 205);
+      background: $yellow;
       display: flex;
       flex-flow: row nowrap;
       align-items: center;
