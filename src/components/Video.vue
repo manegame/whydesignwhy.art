@@ -2,24 +2,25 @@
   <div  class='video__single'
         :class='{ "video__single--viewing": openCurtains }'>
     <div  class='video__single__curtains'
-          @click='openCurtains = !openCurtains'>
+          @click='curtainActions'>
       <div  class='video__single__curtains__left'
-            :class='{ "video__single__curtains__left--open": openCurtains }'></div>
+            :class='[jonathanLeft, curtainLeft]'></div>
       <div  class='video__single__curtains__right'
-            :class='{ "video__single__curtains__right--open": openCurtains }'></div>
+            :class='[jonathanRight, curtainRight]'></div>
     </div>
     <div  class='video__single__video embed-video'
           v-if='options.provider === "youtube"'>
       <youtube  ref="youtube"
                 :video-id="options.id"
-                :player-vars="playerVars"
+                :player-vars="youtubeOptions"
                 @playing="playing"
                 @ended='ended' />
     </div>
     <div  class='video__single__video embed-video'
           v-else-if='options.provider === "vimeo"'>
       <vimeo-player ref='vimeo'
-                    :video-id='options.id' />
+                    :video-id='options.id'
+                    @ended='ended' />
     </div>
   </div>
 </template>
@@ -39,52 +40,49 @@ export default {
         loaded: false
       },
       openCurtains: false,
-      playerVars: {
+      youtubeOptions: {
         autoplay: 0,
         rel: 0,
-        showinfo: 0
+        showinfo: 0,
+        muted: true
       }
     }
   },
   computed: {
+    jonathanLeft () {
+      return 'video__single__curtains__left--' + this.options.ego + ''
+    },
+    jonathanRight () {
+      return 'video__single__curtains__right--' + this.options.ego + ''
+    },
+    curtainLeft () {
+      return {
+        'video__single__curtains__left--open': this.openCurtains
+      }
+    },
+    curtainRight () {
+      return {
+        'video__single__curtains__right--open': this.openCurtains
+      }
+    },
     youtubePlayer () {
       return this.$refs.youtube.player
     },
     vimeoPlayer () {
-      return this.$refs.vimeo.player
+      return this.$refs.vimeo
     }
   },
   methods: {
-    async playVideo () {
-      await this.youtubePlayer.playVideo()
-      // Do something after the playVideo command
-      console.log('playVideo triggered')
-    },
-    playVimeo () {
-      this.vimeoPlayer.play()
-    },
-    playing () {
-      console.log('we watching!')
-    },
     ended () {
-      console.log('video ended')
-    }
-  },
-  watch: {
-    openCurtains (bool) {
-      if (this.options.provider === 'youtube') {
-        console.log(this.options.provider)
-        if (bool) {
-          this.youtubePlayer.playVideo()
-        } else {
-          this.youtubePlayer.pauseVideo()
-        }
-      } else if (this.options.provider === 'vimeo') {
-        if (bool) {
-          setTimeout(this.playVimeo, 3000)
-        } else {
-          console.log('curtains closed')
-        }
+      this.$emit('ended', this.options.id)
+    },
+    curtainActions () {
+      if (this.options.provider === 'vimeo') {
+        this.openCurtains ? this.vimeoPlayer.pause() : this.vimeoPlayer.play()
+        this.openCurtains = !this.openCurtains
+      } else if (this.options.provider === 'youtube') {
+        this.openCurtains ? this.youtubePlayer.pauseVideo() : this.youtubePlayer.playVideo()
+        this.openCurtains = !this.openCurtains
       }
     }
   }
@@ -138,6 +136,10 @@ export default {
           left: -65vw;
           transform: $skew;
         }
+
+        &--hielkema {
+          background-image: url('../../static/left-hielkema.svg');
+        }
       }
 
       &__right {
@@ -154,6 +156,10 @@ export default {
         &--open {
           right: -65vw;
           transform: skew(10deg, 0);
+        }
+
+        &--hielkema {
+          background-image: url('../../static/right-hielkema.svg');
         }
       }
     }
