@@ -65,7 +65,8 @@ export default {
       open: false,
       votes: {
         yes: 0,
-        no: 0
+        no: 0,
+        total: 0
       },
       hasVoted: false,
       voteStatus: ''
@@ -73,7 +74,7 @@ export default {
   },
   computed: {
     yesPercentage () {
-      if (this.votes.yes + this.votes.no === 0) {
+      if (this.votes.total === 0) {
         return 50
       } else {
         let num = this.votes.yes / (this.votes.yes + this.votes.no) * 100
@@ -93,9 +94,6 @@ export default {
           this.submitVote(0)
         }
         this.hasVoted = true
-        this.voteStatus = 'Thanks for your vote!'
-      } else {
-        this.voteStatus = 'You already voted!'
       }
     },
     submitVote (userAnswer) {
@@ -104,9 +102,28 @@ export default {
         mode: 'cors',
         body: JSON.stringify({ answer: userAnswer })
       })
-        .then(res => { console.log(res) })
+        .then(res => res.json())
+        .then(res => {
+          console.log(res)
+          if (res.status === 'duplicate_vote') {
+            this.voteStatus = res.error
+          } else {
+            this.voteStatus = 'Thanks for voting!'
+          }
+          this.votes.yes = Number(res.yes)
+          this.votes.no = Number(res.no)
+          this.votes.total = res.total
+        })
         .catch(err => { console.error(err) })
     }
+  },
+  beforeMount () {
+    fetch('https://manusnijhoff.nl/api/hielkema/vote.php', {
+      method: 'GET',
+      mode: 'cors'
+    })
+      .then(res => { console.log(res) })
+      .catch(err => { console.error(err) })
   }
 }
 </script>

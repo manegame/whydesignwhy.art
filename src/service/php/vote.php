@@ -5,6 +5,66 @@ function breakOut ($response) {
   die();
 }
 
+// 
+// 
+// PREPARE RESPONSE FORMAT
+$response = array();
+
+//
+//
+// DB INFORMATION
+$servername = "localhost";
+$username   = "manuswx118_hielkema";
+$password   = "ts11nt78";
+$dbname     = "manuswx118_hielkema";
+
+// 
+// 
+// START GET
+
+// if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+//   // 
+//   // 
+//   // CREATE CONNECTION
+//   $conn = new mysqli($servername, $username, $password, $dbname);
+
+//   // 
+//   // 
+//   // CHECK CONNECTION
+//   if ($conn->connect_error) {
+//     $response["error"] = $conn->connect_error;
+//     $response["status"] = "connection_error";
+//     breakOut($response);
+//   }
+
+//   // 
+//   // 
+//   // GET AMOUNT OF VOTES
+//   $sqlVotes = "SELECT COUNT(CASE WHEN `Answer` = 1 THEN 1 END) AS yesVotes, COUNT(CASE WHEN `Answer` = 0 THEN 1 END) AS noVotes FROM `Senegal`";
+//   $sqlVotes = $conn->query($sqlaverage, MYSQLI_USE_RESULT);
+  
+//   if ($result = $conn->query($sqlVotes)) {
+//     echo $result;
+
+//     $result->close();
+//   }
+
+//   // 
+//   // 
+//   // CLOSE CONNECTION
+//   $conn->close();
+  
+// }
+
+// END GET
+// 
+// 
+
+// 
+// 
+// START POST
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   // 
@@ -42,14 +102,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     breakOut($response);
   }
 
-  //
-  //
-  // DB INFORMATION
-  $servername = "localhost";
-  $username   = "manuswx118_hielkema";
-  $password   = "ts11nt78";
-  $dbname     = "manuswx118_hielkema";
-
   // 
   // 
   // CREATE CONNECTION
@@ -64,6 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     breakOut($response);
   }
 
+
   // 
   // 
   // CHECK IP
@@ -73,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($result->num_rows > 0) {
       $response["error"] = "Vote already cast!";
       $response["status"] = "duplicate_vote";
-      breakOut($response);
+      // breakOut($response);
     }
 
     $result->close();
@@ -81,29 +134,45 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   $conn->next_result();
 
-  // 
-  // 
-  // INSERT VALUES INTO DB
-  $sqlPost = "INSERT INTO `Senegal` (id, Answer, ip) VALUES ('', '".$answer."', '".$ip."')";
 
-  if ($conn->query($sqlPost) === TRUE) {
-    $response["status"] = "new_record";
-  } else {
-    $response["error"] = $conn->error;
-    $response["status"] = "connection_error";
-    breakOut($response);
+  // 
+  // 
+  // INSERT VALUES INTO DB IF NOT ALREADY VOTED
+
+  if ($response["status"] !== "duplicate_vote") {
+
+    $sqlPost = "INSERT INTO `Senegal` (id, Answer, ip) VALUES ('', '".$answer."', '".$ip."')";
+  
+    if ($conn->query($sqlPost) === TRUE) {
+      $response["status"] = "new_record";
+    } else {
+      $response["error"] = $conn->error;
+      $response["status"] = "connection_error";
+      breakOut($response);
+    }
+  
+    /* no need to free result set because there is none */
+
   }
 
-  /* no need to free result set because there is none */
 
   // 
   // 
   // GET AMOUNT OF VOTES YES AND NO
   $sqlVotes = "SELECT COUNT(CASE WHEN `Answer` = 1 THEN 1 END) AS yesVotes, COUNT(CASE WHEN `Answer` = 0 THEN 1 END) AS noVotes FROM `Senegal`";
-  $sqlVotes = $conn->query($sqlaverage, MYSQLI_USE_RESULT);
-  
+
   if ($result = $conn->query($sqlVotes)) {
-    var_dump($result);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $response["yes"] = $row['yesVotes'];
+        $response["no"] = $row['noVotes'];
+        $response["total"] = $row['yesVotes'] + $row["noVotes"];
+    } else {
+        $response["error"] = "Something went wrong";
+    }
+
+    breakOut($response);
 
     $result->close();
   }
@@ -115,7 +184,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 } else {
 
-  echo "NO POST";
+  echo "NO POST, NO GET";
 
 }
 
