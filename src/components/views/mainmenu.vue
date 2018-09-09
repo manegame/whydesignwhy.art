@@ -1,5 +1,7 @@
 <template>
   <div class='mainmenu'>
+    <!-- POLL -->
+    <Side :content='"Poll"' />
     <!-- LABEL -->
     <router-link  tag='div'
                   class='mainmenu__title'
@@ -48,8 +50,13 @@
 </template>
 
 <script>
+import Side from '@/components/Side'
+
 export default {
   name: 'mainmenu',
+  components: {
+    Side
+  },
   data () {
     return {
       activeItem: ''

@@ -49,6 +49,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'side',
   props: {
@@ -61,8 +63,8 @@ export default {
     return {
       open: false,
       votes: {
-        yes: 1,
-        no: 1
+        yes: 100,
+        no: 20
       },
       hasVoted: false,
       voteStatus: ''
@@ -84,13 +86,24 @@ export default {
   methods: {
     vote (answer) {
       if (!this.hasVoted) {
-        if (answer === 'yes') this.votes.yes++
-        else if (answer === 'no') this.votes.no++
+        if (answer === "yes") {
+          this.submitVote(1)
+        }
+        else if (answer === "no") {
+          this.submitVote(0)
+        }
         this.hasVoted = true
         this.voteStatus = 'Thanks for your vote!'
       } else {
         this.voteStatus = 'You already voted!'
       }
+    },
+    submitVote(userAnswer) {
+      axios.post('https://manusnijhoff.nl/api/hielkema/vote.php', {
+        answer: userAnswer
+      })
+        .then(res => { console.log(res) })
+        .catch(err => { console.error(err) })
     }
   }
 }
@@ -105,10 +118,10 @@ export default {
   width: 80vw;
   height: 100%;
   background: #fff;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: -80vw;
-  z-index: 99;
+  z-index: 9999999;
   transition: all .3s ease;
 
   &__content {
@@ -131,7 +144,7 @@ export default {
       margin: 0 auto;
       border-radius: 10px;
       overflow: hidden;
-      background: rgb(205, 205, 205);
+      background: $yellow;
       display: flex;
       flex-flow: row nowrap;
       align-items: center;
