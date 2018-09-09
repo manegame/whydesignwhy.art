@@ -13,7 +13,6 @@
       <youtube  ref="youtube"
                 :video-id="options.id"
                 :player-vars="youtubeOptions"
-                @playing="playing"
                 @ended='ended' />
     </div>
     <div  class='video__single__video embed-video'
@@ -85,6 +84,19 @@ export default {
         this.openCurtains = !this.openCurtains
       }
     }
+  },
+  beforeDestroy () {
+    console.log('self destruct')
+    this.$emit('curtains', false)
+  },
+  watch: {
+    openCurtains (val) {
+      if (val) {
+        this.$emit('curtains', true)
+      } else {
+        this.$emit('curtains', false)
+      }
+    }
   }
 }
 </script>
@@ -102,6 +114,7 @@ export default {
     position: relative;
     overflow: hidden;
     transition: all 1.2s ease;
+    cursor: pointer;
 
     @include screen-size('small') {
       width: 400px;
@@ -109,8 +122,8 @@ export default {
     }
 
     &--viewing {
-      width: 100vw;
-      height: 56.25vw;
+      width: 80vw;
+      height: 45vw;
     }
 
     &__curtains {

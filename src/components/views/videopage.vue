@@ -1,6 +1,18 @@
 <template>
   <div  class='videopage'
+        :class='{ "videopage--lightsoff": lightsOff }'
         id='parent'>
+    <div class='videopage__videos'>
+      <transition name='fade' mode='out-in'>
+        <Video  v-for='video in videos'
+                :options="video"
+                :key='video.id'
+                class='videopage__videos__single'
+                @ended='videoEnded'
+                v-if='activeVideo === video.id'
+                @curtains='dimLights' />
+      </transition>
+    </div>
     <div class='videopage__filmstrip'>
       <div  class='videopage__filmstrip__item'
             v-for='video in videos'
@@ -10,16 +22,6 @@
             v-html='video.title'
             @click='handleClick(video.id)' />
       </div>
-    </div>
-    <div class='videopage__videos'>
-      <transition name='fade' mode='out-in'>
-        <Video  v-for='video in videos'
-                :options="video"
-                :key='video.id'
-                class='videopage__videos__single'
-                @ended='videoEnded'
-                v-if='activeVideo === video.id' />
-      </transition>
     </div>
   </div>
 </template>
@@ -34,6 +36,7 @@ export default {
   },
   data () {
     return {
+      lightsOff: false,
       activeVideo: '278386917',
       videos: [
         {
@@ -61,6 +64,13 @@ export default {
     }
   },
   methods: {
+    dimLights (bool) {
+      if (bool) {
+        this.lightsOff = true
+      } else {
+        this.lightsOff = false
+      }
+    },
     videoEnded () {
       if (this.activeVideo === '278386917') {
         this.activeVideo = '-v4NwizarDA'
@@ -85,6 +95,11 @@ export default {
   background: $yellow;
   width: 100vw;
   height: 100%;
+  transition: background 1s ease;
+
+  &--lightsoff {
+    background: #222;
+  }
 
   &__filmstrip {
     position: absolute;
@@ -115,7 +130,7 @@ export default {
 
   &__videos {
     width: 100%;
-    height: 100%;
+    height: 95%;
     padding-bottom: 20px;
     color: white;
     overflow: hidden;
@@ -134,7 +149,7 @@ export default {
     transform: initial;
   }
   30% {
-    transform: skew(-3deg, 0) scale(1.04, 1);
+    transform: skew(-3deg, 0) scale(1.1, 1);
   }
   35% {
     transform: initial;
