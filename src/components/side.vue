@@ -9,9 +9,9 @@
     <div  class='side__content'
           v-if='content === "Poll"'>
       <h1 class='side__content__title'>Should these white men go to Africa?</h1>
-      <p class='side__content__desc'>Jonathan Hielkema invites 
-        <a href='https://twitter.com/jimmy_p_nelson?lang=en'>@jimmy_nelson</a>, 
-        <a href='http://renzomartens.com/'>@renzo_martens</a> and 
+      <p class='side__content__desc'>Jonathan Hielkema invites
+        <a href='https://twitter.com/jimmy_p_nelson?lang=en'>@jimmy_nelson</a>,
+        <a href='http://renzomartens.com/'>@renzo_martens</a> and
         <a href='https://www.instagram.com/janhoekjoh/?hl=en'>@jan_hoek</a> for a joint trip to his mini post-colony in ..., Senegal to discuss the ideas outlined in the book. <br>
         <br>
         What do you think? Should they go?
@@ -42,7 +42,7 @@
           </h2>
         </div>
       </div>
-      <p  class='side__content__vote_status' 
+      <p  class='side__content__vote_status'
           v-html='voteStatus' />
     </div>
   </div>
@@ -71,7 +71,7 @@ export default {
     }
   },
   computed: {
-    yesPercentage() {
+    yesPercentage () {
       if (this.votes.yes + this.votes.no === 0) {
         return 50
       } else {
@@ -79,12 +79,12 @@ export default {
         return num.toFixed(2)
       }
     },
-    noPercentage() {
+    noPercentage () {
       return 100 - this.yesPercentage
     }
   },
   methods: {
-    vote(answer) {
+    vote (answer) {
       if (!this.hasVoted) {
         if (answer === "yes") {
           this.submitVote(1)
@@ -210,7 +210,7 @@ export default {
     transform: rotate(-90deg);
     transform-origin: left bottom 0;
     transition: box-shadow 0.3s ease;
-    
+
     &:hover {
       box-shadow: $shadow-inverted;
     }

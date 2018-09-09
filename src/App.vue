@@ -22,6 +22,9 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 
   strong {
     font-weight: normal !important;
@@ -31,14 +34,15 @@ export default {
 .view {
   &--one {
     z-index: 10;
+    width: 100%;
+    min-height: 100vh;
+    pointer-events: none;
   }
 
   &--two {
     z-index: 0;
-    width: 100vw;
-    height: 100vh;
-    position: relative;
-    overflow: hidden;
+    width: 100%;
+    min-height: 100vh;
   }
 }
 

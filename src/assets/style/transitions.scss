@@ -1,6 +1,6 @@
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.3s;
+  transition: opacity 0.15s;
 }
 
 .fade-enter-to,
@@ -15,8 +15,7 @@
 
 .delayed_fade-enter-active,
 .delayed_fade-leave-active {
-  transition: opacity 0.3s;
-  transition-delay: 0.3s;
+  transition: opacity 0.15s;
 }
 
 .delayed_fade-enter-to,

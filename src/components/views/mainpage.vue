@@ -1,6 +1,7 @@
 <template>
   <div class='mainpage'>
     <!-- main -->
+    <!-- <side :content='"Poll"' /> -->
   </div>
 </template>
 

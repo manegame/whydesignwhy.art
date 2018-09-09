@@ -1,125 +1,128 @@
 <template>
-  <div class='videopage'>
-    <div  class='videopage__curtains'
-          @click='openCurtains = !openCurtains'>
-      <div  class='videopage__curtains__left'
-            :class='{ "videopage__curtains__left--open": openCurtains }'></div>
-      <div  class='videopage__curtains__right'
-            :class='{ "videopage__curtains__right--open": openCurtains }'></div>
+  <div  class='videopage'
+        id='parent'>
+    <div class='videopage__filmstrip'>
+      <div  class='videopage__filmstrip__item'
+            v-for='video in videos'
+            :key='"item" + video.id'>
+        <h1 class='videopage__filmstrip__item__title'
+            :class='{"videopage__filmstrip__item__title--active": video.id === activeVideo}'
+            v-html='video.title'
+            @click='handleClick(video.id)' />
+      </div>
     </div>
-    <div class='videopage__video embed-video'>
-      <youtube  :video-id="videoId"
-                ref="youtube"
-                :player-vars="playerVars"
-                @playing="playing"
-                @ended='ended' />
+    <div class='videopage__videos'>
+      <transition name='fade' mode='out-in'>
+        <Video  v-for='video in videos'
+                :options="video"
+                :key='video.id'
+                class='videopage__videos__single'
+                @ended='videoEnded'
+                v-if='activeVideo === video.id' />
+      </transition>
     </div>
   </div>
 </template>
 
 <script>
+import Video from '@/components/Video'
+
 export default {
   name: 'videopage',
+  components: {
+    Video
+  },
   data () {
     return {
-      videoId: 'SqUqVBsbaRk',
-      openCurtains: false,
-      playerVars: {
-        autoplay: 0,
-        rel: 0
+      activeVideo: '278386917',
+      videos: [
+        {
+          provider: 'vimeo',
+          id: '278386917',
+          ego: 'hielkema',
+          title: 'Is This What I Want? – Part 1'
+        },
+        {
+          provider: 'youtube',
+          id: '-v4NwizarDA',
+          ego: 'touchy',
+          title: 'Is This What I Want? – Part 2'
+        }
+      ],
+      videoScroll: {
+        el: '#video2',
+        container: '#parent',
+        duration: 500,
+        easing: 'linear',
+        offset: 0,
+        x: false,
+        y: true
       }
-    }
-  },
-  computed: {
-    player () {
-      return this.$refs.youtube.player
     }
   },
   methods: {
-    async playVideo () {
-      await this.player.playVideo()
-      // Do something after the playVideo command
-      console.log('playVideo triggered')
-    },
-    playing () {
-      console.log('we watching!')
-    },
-    ended () {
-      console.log('video ended')
-    }
-  },
-  watch: {
-    openCurtains (val) {
-      if (val) {
-        console.log('curtains open!')
-        this.player.playVideo()
+    videoEnded () {
+      if (this.activeVideo === '278386917') {
+        this.activeVideo = '-v4NwizarDA'
       } else {
-        this.player.pauseVideo()
+        this.activeVideo = '278386917'
       }
+    },
+    handleClick (id) {
+      this.activeVideo = id
     }
   }
 }
+
 </script>
 
 <style scoped lang='scss'>
 @import '../../assets/style/variables';
+@import '../../assets/style/helpers/mixins';
+@import '../../assets/style/helpers/responsive.scss';
 
 .videopage {
+  background: $yellow;
   width: 100vw;
-  height: 100vh;
-  background: black;
-  color: white;
-  overflow: hidden;
+  height: 100%;
 
-  &__curtains {
-    z-index: 5;
+  &__filmstrip {
     position: absolute;
+    bottom: 0;
     width: 100%;
-    height: 100%;
-    overflow: hidden;
-    cursor: pointer;
+    height: auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
 
-    &__left {
-      position: absolute;
-      left: 0;
-      width: 50%;
-      height: 100%;
-      background: white;
-      background-image: url('../../../static/left.svg');
-      background-position: right;
-      background-repeat: no-repeat;
-      transition: all 0.41s ease-out;
-      transform: none;
-      animation: peek 10s infinite;
-
-      &--open {
-        left: -65vw;
-        transform: $skew;
-      }
+    &__collapse {
+      color: #fff;
+      width: 100%;
     }
 
-    &__right {
-      position: absolute;
-      right: 0;
-      width: 50%;
-      height: 100%;
-      background: white;
-      background-image: url('../../../static/right.svg');
-      background-position: left;
-      background-repeat: no-repeat;
-      transition: all 0.45s ease-out;
+    &__item {
+      &__title {
+        cursor: pointer;
+        color: white;
 
-      &--open {
-        right: -65vw;
-        transform: skew(10deg, 0);
+        &--active {
+          color: black;
+        }
       }
     }
   }
 
-  &__video {
-    z-index: 4;
-    width: 60vw;
-    margin-left: 20vw;
+  &__videos {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 20px;
+    color: white;
+    overflow: hidden;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
   }
 }
 
@@ -131,7 +134,7 @@ export default {
     transform: initial;
   }
   30% {
-    transform: skew(-4deg, 0) scale(1.01, 1);
+    transform: skew(-3deg, 0) scale(1.04, 1);
   }
   35% {
     transform: initial;
