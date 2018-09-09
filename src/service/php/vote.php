@@ -20,49 +20,6 @@ $dbname     = "manuswx118_hielkema";
 
 // 
 // 
-// START GET
-
-// if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-
-//   // 
-//   // 
-//   // CREATE CONNECTION
-//   $conn = new mysqli($servername, $username, $password, $dbname);
-
-//   // 
-//   // 
-//   // CHECK CONNECTION
-//   if ($conn->connect_error) {
-//     $response["error"] = $conn->connect_error;
-//     $response["status"] = "connection_error";
-//     breakOut($response);
-//   }
-
-//   // 
-//   // 
-//   // GET AMOUNT OF VOTES
-//   $sqlVotes = "SELECT COUNT(CASE WHEN `Answer` = 1 THEN 1 END) AS yesVotes, COUNT(CASE WHEN `Answer` = 0 THEN 1 END) AS noVotes FROM `Senegal`";
-//   $sqlVotes = $conn->query($sqlaverage, MYSQLI_USE_RESULT);
-  
-//   if ($result = $conn->query($sqlVotes)) {
-//     echo $result;
-
-//     $result->close();
-//   }
-
-//   // 
-//   // 
-//   // CLOSE CONNECTION
-//   $conn->close();
-  
-// }
-
-// END GET
-// 
-// 
-
-// 
-// 
 // START POST
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

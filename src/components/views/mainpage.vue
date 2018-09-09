@@ -1,11 +1,11 @@
 <template>
   <div class='mainpage'>
-    <Side :content='"Poll"' />
+    <Side />
   </div>
 </template>
 
 <script>
-import Side from '@/components/side'
+import Side from '@/components/Side'
 
 export default {
   name: 'mainpage',

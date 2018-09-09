@@ -13,3 +13,5 @@ src/service/php
 *.ntvs*
 *.njsproj
 *.sln
+
+*.php
