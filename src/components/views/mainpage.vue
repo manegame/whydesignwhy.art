@@ -1,13 +1,17 @@
 <template>
   <div class='mainpage'>
-    <!-- main -->
-    <!-- <side :content='"Poll"' /> -->
+    <Side :content='"Poll"' />
   </div>
 </template>
 
 <script>
+import Side from '@/components/Side'
+
 export default {
   name: 'mainpage',
+  components: {
+    Side
+  },
   data () {
     return {
       msg: 'main'

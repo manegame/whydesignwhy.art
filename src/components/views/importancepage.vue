@@ -1,11 +1,11 @@
 <template>
   <div class='importance'>
     <File />
-    <div class="importance__comments">
+    <!-- <div class="importance__comments">
       <vue-disqus shortname="whydesignwhy-art"
                   :identifier="1"
                   url="http://whydesignwhy.art/importance" />
-    </div>
+    </div> -->
   </div>
 </template>
 

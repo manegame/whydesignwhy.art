@@ -1,6 +1,4 @@
 <IfModule mod_headers.c>
-    SetEnvIf Origin "http(s)?://(www\.)?(localhost|whydesignwhy.art|staging--condescending-noether-6fc64d.netlify.com)$" AccessControlAllowOrigin=$0$1
-    Header add Access-Control-Allow-Origin %{AccessControlAllowOrigin}e env=AccessControlAllowOrigin
-    Header always set Access-Control-Allow-Credentials true
-    Header always set Access-Control-Allow-Methods "POST, GET, OPTIONS"
+  SetEnvIfNoCase Origin "https?://(www\.)?(whydesignwhy\.art|localhost)(:\d+)?$" ACAO=$0
+  Header set Access-Control-Allow-Origin %{ACAO}e env=ACAO
 </IfModule>

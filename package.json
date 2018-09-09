@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "node-fetch": "^2.2.0",
     "node-sass": "^4.9.0",
     "oridomi": "^1.1.2",
     "sass-loader": "^7.0.3",

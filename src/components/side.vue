@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import fetch from 'node-fetch'
 import axios from 'axios'
 
 export default {
@@ -63,8 +64,8 @@ export default {
     return {
       open: false,
       votes: {
-        yes: 100,
-        no: 20
+        yes: 0,
+        no: 0
       },
       hasVoted: false,
       voteStatus: ''
@@ -86,10 +87,9 @@ export default {
   methods: {
     vote (answer) {
       if (!this.hasVoted) {
-        if (answer === "yes") {
+        if (answer === 'yes') {
           this.submitVote(1)
-        }
-        else if (answer === "no") {
+        } else if (answer === 'no') {
           this.submitVote(0)
         }
         this.hasVoted = true
@@ -98,9 +98,11 @@ export default {
         this.voteStatus = 'You already voted!'
       }
     },
-    submitVote(userAnswer) {
-      axios.post('https://manusnijhoff.nl/api/hielkema/vote.php', {
-        answer: userAnswer
+    submitVote (userAnswer) {
+      fetch('https://manusnijhoff.nl/api/hielkema/vote.php', {
+        method: 'POST',
+        mode: 'cors',
+        body: JSON.stringify({ answer: userAnswer })
       })
         .then(res => { console.log(res) })
         .catch(err => { console.error(err) })
@@ -165,7 +167,7 @@ export default {
           &--perc {
             font-size: 12px;
             line-height: 12px;
-            color: #fff;
+            color: #000;
             vertical-align: super;
           }
         }
@@ -175,7 +177,7 @@ export default {
         }
 
         &:hover {
-          background-color: rgb(207, 207, 207);
+          background-color: #fff;
         }
       }
     }
