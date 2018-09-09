@@ -40,13 +40,13 @@ export default {
           provider: 'vimeo',
           id: '278386917',
           ego: 'hielkema',
-          title: 'Intro'
+          title: 'Is This What I Want? – Part 1'
         },
         {
           provider: 'youtube',
           id: '-v4NwizarDA',
           ego: 'touchy',
-          title: 'Is This What I Want?'
+          title: 'Is This What I Want? – Part 2'
         }
       ],
       videoScroll: {

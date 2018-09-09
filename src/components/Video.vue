@@ -94,6 +94,8 @@ export default {
 @import '../assets/style/helpers/responsive.scss';
 
 .video {
+  background-color: $yellow;
+
   &__single {
     width: 800px;
     height: 450px;
