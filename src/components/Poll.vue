@@ -2,11 +2,11 @@
   <div  class='poll'>
     <h1 class='poll__title'>Should these white men go to Africa?</h1>
     <img  class='poll__img'
-          src='static/whiteboys.jpg' />
+          src='static/whiteboys-2.jpg' />
     <p class='poll__desc'>Jonathan Hielkema invites (from left to right)
       <a href='https://twitter.com/jimmy_p_nelson?lang=en'>@jimmy_nelson</a>,
-      <a href='http://renzomartens.com/'>@renzo_martens</a> and
-      <a href='https://www.instagram.com/janhoekjoh/?hl=en'>@jan_hoek</a> for a joint trip to his mini post-colony in ..., Senegal to discuss the ideas outlined in the book. <br>
+      <a href='https://www.instagram.com/janhoekjoh/?hl=en'>@jan_hoek</a> and
+      <a href='http://renzomartens.com/'>@renzo_martens</a> for a joint trip to his micro-colony in Abéné, Senegal to discuss the ideas outlined in the book “Is This What I Want?” <br>
       <br>
       What do you think? Should they go?
     </p>
