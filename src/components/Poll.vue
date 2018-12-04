@@ -2,7 +2,7 @@
   <div  class='poll'>
     <h1 class='poll__title'>Should these white men go to Africa?</h1>
     <img  class='poll__img'
-          src='static/whiteboys-2.jpg' />
+          src='static/JoHi_EnDeRest_v1.jpg' />
     <p class='poll__desc'>Jonathan Hielkema invites (from left to right)
       <a href='https://twitter.com/jimmy_p_nelson?lang=en'>@jimmy_nelson</a>,
       <a href='https://www.instagram.com/janhoekjoh/?hl=en'>@jan_hoek</a> and
